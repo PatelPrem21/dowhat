@@ -1,0 +1,382 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #0c0809;
+  --rose: #c2566a;
+  --rose-lt: #e8a0b0;
+  --gold: #c9a06a;
+  --gold-lt: #eeddb8;
+  --cream: #f5ede8;
+  --muted: #7a6068;
+  --card: #140d10;
+  --border: #2a1820;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--cream);
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+  cursor: default;
+}
+
+/* ── MUSIC PLAYER ── */
+#musicBar {
+  position: fixed; bottom: 24px; right: 24px; z-index: 100;
+  display: flex; align-items: center; gap: 12px;
+  background: rgba(20,13,16,.92);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+  padding: 10px 18px; border-radius: 999px;
+}
+#musicBar .song-info { line-height: 1.3; }
+#musicBar .song-title { font-size: 11px; color: var(--gold-lt); font-weight: 500; }
+#musicBar .song-sub   { font-size: 9px;  color: var(--muted); letter-spacing: .05em; }
+#playBtn {
+  width: 34px; height: 34px; border-radius: 50%;
+  border: 1px solid var(--rose);
+  background: transparent; color: var(--rose-lt);
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  font-size: 14px; transition: background .2s;
+  flex-shrink: 0;
+}
+#playBtn:hover { background: var(--rose); color: #fff; }
+.equalizer {
+  display: flex; align-items: flex-end; gap: 2px; height: 16px;
+}
+.eq-bar {
+  width: 3px; background: var(--rose);
+  border-radius: 2px; opacity: .7;
+  animation: eq 1s ease-in-out infinite;
+}
+.eq-bar:nth-child(1){ height: 8px;  animation-delay: 0s; }
+.eq-bar:nth-child(2){ height: 14px; animation-delay: .15s; }
+.eq-bar:nth-child(3){ height: 6px;  animation-delay: .3s; }
+.eq-bar:nth-child(4){ height: 12px; animation-delay: .1s; }
+@keyframes eq { 0%,100%{ transform: scaleY(1) } 50%{ transform: scaleY(.4) } }
+.equalizer.paused .eq-bar { animation-play-state: paused; }
+
+/* ── PARTICLES ── */
+#canvas {
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  opacity: .55;
+}
+
+/* ── HERO ── */
+#hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  position: relative; z-index: 1;
+  padding: 40px 24px;
+}
+
+.hero-tag {
+  font-size: 10px; letter-spacing: .4em; text-transform: uppercase;
+  color: var(--gold); opacity: .7; margin-bottom: 20px;
+}
+
+.hero-name {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(4.5rem, 12vw, 9rem);
+  color: var(--rose-lt);
+  line-height: 1;
+  margin-bottom: 8px;
+  text-shadow: 0 0 80px rgba(194,86,106,.35);
+  animation: nameGlow 3s ease-in-out infinite;
+}
+@keyframes nameGlow {
+  0%,100% { text-shadow: 0 0 60px rgba(194,86,106,.3); }
+  50%      { text-shadow: 0 0 100px rgba(194,86,106,.6); }
+}
+
+.hero-nick {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic; font-size: clamp(1.2rem, 3vw, 1.8rem);
+  color: var(--gold); opacity: .75; margin-bottom: 48px;
+}
+
+.months-badge {
+  display: inline-flex; flex-direction: column; align-items: center;
+  border: 1px solid var(--border); padding: 20px 44px;
+  margin-bottom: 48px;
+  position: relative;
+}
+.months-badge::before, .months-badge::after {
+  content: ''; position: absolute;
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--gold);
+  opacity: .5;
+}
+.months-badge::before { top: -3px; left: 50%; transform: translateX(-50%); }
+.months-badge::after  { bottom: -3px; left: 50%; transform: translateX(-50%); }
+.months-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 4.5rem; font-weight: 300; line-height: 1;
+  color: var(--cream);
+}
+.months-label {
+  font-size: 9px; letter-spacing: .35em; text-transform: uppercase;
+  color: var(--muted); margin-top: 4px;
+}
+
+.hero-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  color: var(--muted); max-width: 440px;
+  line-height: 1.8;
+}
+
+.scroll-cue {
+  position: absolute; bottom: 32px;
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  font-size: 9px; letter-spacing: .3em; text-transform: uppercase;
+  color: var(--muted); opacity: .5;
+  animation: bob 2s ease-in-out infinite;
+}
+@keyframes bob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(5px)} }
+.scroll-cue::after {
+  content: '↓'; font-size: 14px; opacity: .6;
+}
+
+/* ── SECTION WRAPPER ── */
+.section {
+  max-width: 1000px; margin: 0 auto;
+  padding: 80px 24px;
+  position: relative; z-index: 1;
+}
+
+.section-label {
+  font-size: 9px; letter-spacing: .45em; text-transform: uppercase;
+  color: var(--gold); opacity: .6; margin-bottom: 10px; text-align: center;
+}
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 300; text-align: center; color: var(--cream);
+  margin-bottom: 56px; line-height: 1.2;
+}
+.section-title em { color: var(--rose-lt); font-style: italic; }
+
+/* ── MEMORY WALL ── */
+.memory-wall {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.memory-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+  transition: transform .3s, box-shadow .3s;
+  cursor: default;
+}
+.memory-card:hover {
+  transform: translateY(-6px) rotate(.5deg);
+  box-shadow: 0 20px 50px rgba(194,86,106,.12);
+}
+
+/* Photo slot */
+.memory-photo {
+  width: 100%; aspect-ratio: 4/3;
+  background: #1c1014;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 10px;
+  border-bottom: 1px solid var(--border);
+  position: relative; overflow: hidden;
+}
+.memory-photo img {
+  width: 100%; 
+  height: 100%; 
+  object-fit: contain;
+  display: block;
+}
+.photo-placeholder {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 8px; width: 100%; height: 100%;
+}
+.photo-placeholder .icon {
+  font-size: 2rem; opacity: .25;
+}
+.photo-placeholder .hint {
+  font-size: 10px; letter-spacing: .15em; text-transform: uppercase;
+  color: var(--muted); opacity: .5;
+}
+/* click to add photo */
+.memory-photo.has-upload {
+  cursor: pointer;
+}
+.memory-photo.has-upload:hover .upload-overlay {
+  opacity: 1;
+}
+.upload-overlay {
+  position: absolute; inset: 0;
+  background: rgba(194,86,106,.18);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity .2s;
+  font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--rose-lt);
+}
+input.photo-input {
+  display: none;
+}
+
+/* Memory text */
+.memory-body { padding: 20px; }
+.memory-date {
+  font-size: 9px; letter-spacing: .3em; text-transform: uppercase;
+  color: var(--gold); opacity: .55; margin-bottom: 8px;
+}
+.memory-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.25rem; font-weight: 400;
+  color: var(--cream); margin-bottom: 6px;
+}
+.memory-msg {
+  font-size: 13px; color: var(--muted); line-height: 1.7;
+  font-style: italic;
+}
+.memory-msg[contenteditable="true"] {
+  outline: none; border-bottom: 1px dashed var(--border);
+  padding-bottom: 2px;
+}
+.memory-msg[contenteditable="true"]:focus {
+  border-color: var(--rose); color: var(--cream);
+}
+
+/* ── SPECIAL MESSAGE SECTION ── */
+#message-section {
+  background: #0f090c;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.letter-wrap {
+  max-width: 680px; margin: 0 auto;
+  text-align: center;
+}
+
+.letter-to {
+  font-family: 'Great Vibes', cursive;
+  font-size: 2.8rem; color: var(--rose-lt);
+  margin-bottom: 32px; opacity: .8;
+}
+
+.letter-box {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 40px 44px;
+  position: relative; text-align: left;
+}
+.letter-box::before {
+  content: '\201C';
+  position: absolute; top: -10px; left: 24px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 6rem; color: var(--rose); opacity: .2; line-height: 1;
+}
+.letter-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem; font-weight: 300; line-height: 2;
+  color: #d8c8c8;
+  min-height: 120px;
+}
+.letter-text[contenteditable="true"] {
+  outline: none;
+}
+.letter-text[contenteditable="true"]:empty::before {
+  content: attr(data-placeholder);
+  color: var(--muted); opacity: .45; font-style: italic;
+  pointer-events: none;
+}
+
+.letter-sign {
+  font-family: 'Great Vibes', cursive;
+  font-size: 2rem; color: var(--gold);
+  text-align: right; margin-top: 24px; opacity: .75;
+}
+
+/* ── NAME SCATTER ── */
+#names-section {
+  text-align: center;
+  padding: 80px 24px;
+  position: relative; z-index: 1;
+}
+
+.names-cloud {
+  max-width: 800px; margin: 0 auto;
+  display: flex; flex-wrap: wrap;
+  gap: 12px 20px; justify-content: center;
+  align-items: center;
+}
+
+.name-word {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  color: var(--rose-lt);
+  opacity: 0;
+  animation: fadeWord 1s forwards;
+  cursor: default;
+  transition: color .2s, opacity .2s;
+}
+.name-word:hover { color: #fff; }
+@keyframes fadeWord { to { opacity: 1; } }
+
+/* ── BOTTOM CLOSER ── */
+#closer {
+  min-height: 60vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center; padding: 80px 24px;
+  position: relative; z-index: 1;
+}
+
+.closer-name {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(3.5rem, 10vw, 7rem);
+  color: var(--rose-lt);
+  margin-bottom: 20px;
+  animation: nameGlow 4s ease-in-out infinite;
+}
+
+.closer-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic; font-size: 1.3rem;
+  color: var(--muted); max-width: 420px;
+  line-height: 1.9;
+}
+
+.heart-final {
+  font-size: 2.5rem; margin-top: 36px;
+  animation: heartbeat 1.4s ease-in-out infinite;
+}
+@keyframes heartbeat {
+  0%,100% { transform: scale(1); }
+  14%     { transform: scale(1.2); }
+  28%     { transform: scale(1); }
+  42%     { transform: scale(1.1); }
+  56%     { transform: scale(1); }
+}
+
+/* ── EDIT MODE HINT ── */
+.edit-hint {
+  position: fixed; top: 20px; left: 20px; z-index: 100;
+  font-size: 10px; letter-spacing: .12em;
+  color: var(--muted); opacity: .5;
+  background: rgba(20,13,16,.7);
+  padding: 6px 12px; border-radius: 999px;
+  border: 1px solid var(--border);
+}
+
+@media (max-width: 600px) {
+  .memory-wall { grid-template-columns: 1fr; }
+  .letter-box  { padding: 28px 22px; }
+  #musicBar    { bottom: 14px; right: 14px; padding: 8px 14px; }
+}

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>4 Months — Hersheyss 🤍</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:wght@300;400;500&family=Great+Vibes&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/script.js"></script>
+</head>
+
+<body>
+
+  <div class="edit-hint">✏️ click messages to edit · tap photos to add</div>
+
+  <!-- PARTICLES -->
+  <canvas id="canvas"></canvas>
+
+  <!-- MUSIC BAR
+  <div id="musicBar">
+    <div class="equalizer paused" id="eq">
+      <div class="eq-bar"></div>
+      <div class="eq-bar"></div>
+      <div class="eq-bar"></div>
+      <div class="eq-bar"></div>
+    </div>
+    <div class="song-info">
+      <div class="song-title">Pehli Mohabbat</div>
+      <div class="song-sub">Darshan Raval</div>
+    </div>
+    <button id="playBtn" onclick="toggleMusic()">▶</button>
+  </div> -->
+
+  <!-- HERO -->
+  <section id="hero">
+    <p class="hero-tag">4 months of us</p>
+    <h1 class="hero-name">Hersheyss</h1>
+    <p class="hero-nick">my Gotuu 🤍</p>
+    <div class="months-badge">
+      <span class="months-num">4</span>
+      <span class="months-label">months together</span>
+    </div>
+    <p class="hero-sub">
+      Four months of late nights, long calls,<br>
+      and falling a little more every single day.
+    </p>
+    <div class="scroll-cue">scroll</div>
+  </section>
+
+  <!-- MEMORY WALL -->
+  <div class="section">
+    <p class="section-label">our moments</p>
+    <h2 class="section-title">The wall of <em>us</em></h2>
+
+    <div class="memory-wall" id="memoryWall">
+
+      <!-- CARD 1 -->
+      <div class="memory-card">
+        <div class="memory-photo">
+          <img src="images/month1.jpeg" alt="Month 1">
+        </div>
+        <div class="memory-body">
+          <div class="memory-date">Month 1</div>
+          <div class="memory-title">The beginning</div>
+          <div class="memory-msg" contenteditable="true" data-placeholder="write your memory here...">
+            Okay so yaa etlo kai khass nai but aa photo to beginning no che to always aa photo mate ek alag perspective mari nazar ma rehsejj aa photo na hot to maybe aa date hot but 4th month na hot so cheers to us.
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 2 -->
+      <div class="memory-card">
+        <div class="memory-photo">
+          <img src="images/month2.jpeg" alt="Month 1">
+        </div>
+        <div class="memory-body">
+          <div class="memory-date">Month 2</div>
+          <div class="memory-title">My favourite Moment</div>
+          <div class="memory-msg" contenteditable="true">
+            aa to pela bi kidhelu che ke aa maro one of the best image che kemke ani pachad ni story hji mari fav che ee taru text premuuuuuuuuuuuuuuuuu wtf aa jo and then tu ketlii khush hti tu j photo banai ne gandii thai gyi hti sometimes ee hersheys ne miss kru chu aa kaam ma ne kaam ma ee thodi busy che etle but koii na gme bi etlij che hji etle bindass reh.
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 3 -->
+      <div class="memory-card">
+        <div class="memory-photo">
+          <img src="images/month3.jpeg" alt="Month 1">
+        </div>
+        <div class="memory-body">
+          <div class="memory-date">Month 3</div>
+          <div class="memory-title">When I knew</div>
+          <div class="memory-msg" contenteditable="true">
+            i can say aa apdo golden time hto mare exams hti to me akhi akhi raat jagto and apde je vaato krta badhi bau msti hasta ahaaan i really want evu fri kriye bnne loko fri excited thaine besiye and mst akhi raat vaat kriye khbr nai kyare thse but joiyee hve ee to but i love this pic. a time pr thyu htu ke naa we meant to be together frii krsu avu kaik time mde tyare?
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 4 -->
+      <div class="memory-card">
+        <div class="memory-photo">
+          <img src="images/month4.jpeg" alt="Month 1">
+        </div>
+        <div class="memory-body">
+          <div class="memory-date">Month 4</div>
+          <div class="memory-title">Right now</div>
+          <div class="memory-msg" contenteditable="true">
+            this is just a random photo je latest screenshot che apdo and a journey ahiya suhdi pohchi and hji agad jse wohoooo.
+            also please do express me taru reaction su reh che tne bhle aa na gmyu hoy ke kantadoa yo hoy avi rite online digital ma but je hoyy ee please i want ke tu kehh bss biju kai naii
+            and haa aje bhul tari hti brbr chal(haahahahaha laptop ma thi emoji nai mokli skyo).Peace Out
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SPECIAL MESSAGE -->
+  <section id="voice-section" class="section">
+
+    <p class="section-label">A piece of my heart</p>
+
+    <h2 class="section-title">
+      Hear my <em>voice</em>
+    </h2>
+
+    <div class="voice-card">
+
+      <div class="voice-icon">
+        🎙️
+      </div>
+
+      <h3>Just press play.</h3>
+
+      <p>
+        I couldn't fit everything into words...
+        so I recorded this for you.
+      </p>
+
+      <audio controls preload="metadata">
+        <source src="voices/4audio.ogg" type="audio/mpeg">
+        Your browser does not support audio.
+      </audio>
+
+    </div>
+
+  </section>
+
+  <!-- NAME CLOUD -->
+  <section id="names-section">
+    <p class="section-label" style="margin-bottom:36px">every name i have for you</p>
+    <div class="names-cloud" id="namesCloud"></div>
+  </section>
+
+  <!-- CLOSER -->
+  <section id="closer">
+    <div class="closer-name">Hersheyss</div>
+    <p class="closer-text">
+      Four months of you is my favourite thing<br>
+      that has ever happened to me.<br>
+      Here's to every month after this one.
+    </p>
+    <div class="heart-final">🤍</div>
+  </section>
+</body>
+
+</html>
